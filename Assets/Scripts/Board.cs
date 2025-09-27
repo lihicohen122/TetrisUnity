@@ -47,16 +47,10 @@ public class Board : MonoBehaviour
         }
         else
         {
-            GameOver();
+            isGameActive = false; //the game is over 
+            GameManager.Instance.GameOver(); //call the game manager
+            this.tilemap.ClearAllTiles(); //clear the board
         }
-    }
-
-    private void GameOver()
-    {
-        isGameActive = false;
-        GameManager.Instance.GameOver();
-        this.tilemap.ClearAllTiles(); //clears the board 
-        //TODO-clear the score 
     }
 
     public void Set(Piece piece)
