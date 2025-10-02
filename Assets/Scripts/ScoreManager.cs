@@ -5,10 +5,17 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [Header("UI")] [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TMP_Text highScoreText;
+
 
     private int score;
+
+
+    //highscore board sutff some times its shit sometimes is not
+    const string HighScoreKey = "HighScore";
+    public int Score { get; private set; }
+
 
     private void Awake()
     {
@@ -17,7 +24,9 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
+        UpdateUI();
     }
 
     public void ResetScore()
@@ -46,7 +55,6 @@ public class ScoreManager : MonoBehaviour
         {
             points = 800;
         }
-
         //bonus for clearing more than two lines- in addition to points
         if (linesCleared >= 2)
         {
@@ -54,14 +62,22 @@ public class ScoreManager : MonoBehaviour
         }
 
         score += points;
+        Score = score;
+
+        int hs = PlayerPrefs.GetInt(HighScoreKey, 0);
+        if (score > hs)
+        {
+            PlayerPrefs.SetInt(HighScoreKey, score);
+            PlayerPrefs.Save();
+        }
+
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        if (scoreText != null)
-        {
-            scoreText.text = score.ToString();
-        }
+        if (scoreText) scoreText.text = score.ToString();
+        if (highScoreText) highScoreText.text = PlayerPrefs.GetInt(HighScoreKey, 0).ToString();
     }
+
 }

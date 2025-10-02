@@ -104,6 +104,7 @@ public class Board : MonoBehaviour
             if (isLineFull(row))
             {
                 StartCoroutine(ShowGoodJob());
+                FindObjectOfType<LineClearVFX>()?.PlayRow(row);
                 LineClear(row);
                 linesCleared++;
             }

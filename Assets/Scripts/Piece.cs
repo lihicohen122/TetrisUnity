@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Piece : MonoBehaviour //we only have one piece that we are controlling each time (we can re-initialize it) - thats why we chose to work like this
