@@ -15,7 +15,7 @@ public class LineClearVFX : MonoBehaviour
 
     void Awake()
     {
-        board = FindObjectOfType<Board>();
+        board = FindFirstObjectByType<Board>();
     }
 
     public void PlayRow(int row)
@@ -30,13 +30,11 @@ public class LineClearVFX : MonoBehaviour
 
         for (int i = 0; i < flashes; i++)
         {
-            // paint overlay tiles across the row
             for (int x = bounds.xMin; x < bounds.xMax; x++)
                 fxTilemap.SetTile(new Vector3Int(x, row, 0), fxTile);
 
             yield return new WaitForSeconds(flashInterval);
 
-            // clear overlay tiles
             for (int x = bounds.xMin; x < bounds.xMax; x++)
                 fxTilemap.SetTile(new Vector3Int(x, row, 0), null);
 

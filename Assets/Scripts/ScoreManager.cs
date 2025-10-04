@@ -10,9 +10,6 @@ public class ScoreManager : MonoBehaviour
 
 
     private int score;
-
-
-    //highscore board sutff some times its shit sometimes is not
     const string HighScoreKey = "HighScore";
     public int Score { get; private set; }
 
@@ -55,6 +52,7 @@ public class ScoreManager : MonoBehaviour
         {
             points = 800;
         }
+
         //bonus for clearing more than two lines- in addition to points
         if (linesCleared >= 2)
         {
